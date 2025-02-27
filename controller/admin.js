@@ -31,7 +31,7 @@ const viewBlog=async(req,res)=>{
         if(!user){
             return res.status(400).render("errorAdmin", { errorMessage: "admin not found" });
         }
-        res.render("viewBlogadmin",{posts:post,title:"view",user:user})
+        res.render("viewBlogAdmin",{posts:post,title:"view",user:user})
         
      
     } catch (error) {
