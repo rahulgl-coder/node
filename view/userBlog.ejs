@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users' Blogs</title>
+    <link rel="stylesheet" href="/home.css">
+</head>
+<body>
+    <!-- Include header -->
+    <%- include('partial/header') %>
+
+    <main>
+        <section class="blog-posts">
+            <h2>My Blog </h2>
+            <% if (posts && posts.length > 0) { %>
+                <ul>
+                    <% posts.forEach(post => { %>
+                        <li>
+                            <% if (post.image) { %>
+                                <img src="/uploads/<%= post.image %>" alt="Post Image" width="200">
+                            <% } %>
+                            <h3><%= post.title %></h3>
+                            <p><%= post.content %></p>
+                            <p>Posted on: <%= new Date(post.createdAt).toLocaleString() %></p>
+                           <a href="/editBlog/<%= post._id%>">Edit</a>
+                            <a href="/delete/<%= post._id %>"onclick="return confirm('Are you sure?')">Delete</a>
+                            <a href="/viewPost/<%= post._id %>">View</a>
+                     
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+           
+             
+                    <p>No posts available. <a href="/createBlog">Create a post</a></p>
+ 
+            <% } %>
+        </section>
+    </main>
+
+    <!-- Include footer -->
+    <%- include('partial/footer') %>
+</body>
+</html>

@@ -1,0 +1,23 @@
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-family: Arial, sans-serif;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+footer p {
+    margin: 0;
+    font-size: 16px;
+}
+
+footer p:hover {
+    color: #ff9800;  
+    transition: color 0.3s ease-in-out;
+}

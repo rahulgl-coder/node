@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/createBlog.css">
+   
+</head>
+<body>
+    <!-- Include header -->
+    <%- include('partial/header', { user: user }) %>
+
+    <main>
+        
+            <section class="create-post">
+                <h3>Create a New Post</h3>
+                <form action="/createBlog" method="POST" enctype="multipart/form-data">
+                    <table>
+                        <tr>
+                            <td><label for="title">Title:</label></td>
+                            <td><input type="text" id="title" name="title" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="content">Content:</label></td>
+                            <td><textarea id="content" rows="12" name="content" required></textarea></td>
+                        </tr>
+                        <tr>
+                           
+                            <input onchange="handleImageChange(event)"   type="file" name="image" id="image" accept="image/*" required hidden>
+                            <label for="image" style="cursor: pointer; display: inline-block; padding: 10px; background: #007bff; color: white; border-radius: 5px;">Upload Image</label>
+                        
+                            <img style="width: 200px; height: 200px;border:none;" id="imagePreview" alt="">
+
+                        </tr>
+                        <tr>
+                            <td colspan="2"><button type="submit">Publish</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </section>
+        <% %>
+    </main>
+
+    <!-- Include footer -->
+    <%- include('partial/footer') %>
+
+    <script>
+
+        const a=()=>{
+            console.log("jgjvvjvhv");
+            
+        }
+        const handleImageChange = (e)=>{
+           try {
+              const image = e.target.files[0]
+              const imageUrl = URL.createObjectURL(image);
+              const imageElement = document.getElementById("imagePreview")
+              imageElement.src = imageUrl
+           } catch (error) {
+           }
+        }
+         const handleImageChange2= (e)=>{
+           try {
+              const image = e.target.files[0]
+              const imageUrl = URL.createObjectURL(image);
+              const imageElement = document.getElementById("imagePreview2")
+              imageElement.src = imageUrl
+           } catch (error) {
+           }
+        }
+     </script>
+</body>
+</html>
+
+

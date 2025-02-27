@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title %></title>
+    <link rel="stylesheet" href="home.css"> 
+</head>
+<body>
+ 
+    <%- include('partial/header', { user: user }) %>
+
+    <main>
+        <section class="hero">
+           
+          
+                <p>Welcome , <%= user.userName %>!</p>
+           
+        </section>
+
+        <section class="blog-posts">
+            <h3>Latest Posts</h3>
+            <% if (posts && posts.length > 0) { %>
+                <ul>
+                    <% posts.forEach(post => { %>
+                       
+                            
+                            <div style="display: flex; gap: 10px;" class="post-card">
+                                <img style="width: 30%; height: 175px; border-radius: 1px solid grey;" src="/uploads/<%= post.image %>" alt="">
+                                <div style="display: flex; flex-direction: column; width: 60%;">
+                                <h2><%= post.title %></h2>
+                                <p><%= post.content %></p>
+                                <p>Posted on: <%= new Date(post.createdAt).toLocaleString() %></p>
+                                <h5>Author: <%= post.author.userName %></h5>
+                              <div class="post-actions"> <a href="/viewPost/<%= post._id %>">View</a></div>
+                            </div>
+        
+                    </div>
+        </li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <p>No posts available. <a href="/createBlog">Create a post</a></p>
+            <% } %>
+        </section>
+    </main>
+
+
+    <%- include('partial/footer') %>
+   
+    
+    <script>
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
+    </script>
+    
+
+</body>
+</html>

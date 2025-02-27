@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/viewBlog.css"> <!-- Add your CSS file -->
+</head>
+<body>
+
+  
+    <%- include('partial/adminHeader', { user: user }) %>
+
+    <main>
+        <article class="post-container">
+            <h1><%= post.title %></h1>
+            <p>By <%= new Date(post.createdAt).toLocaleString() %></p>
+            <img src="/uploads/<%= post.image %>" alt="Post Image" class="post-image">
+            <p class="post-content"><%= post.content %></p>
+            <h4>By: <%= post.author.userName %></h4>
+        </article>
+
+        <a href="javascript:history.back()">Back</a>
+
+    </main>
+
+ 
+    <%- include('partial/footer') %>
+
+</body>
+</html>

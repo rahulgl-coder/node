@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Blog Website</title>
+    <link rel="stylesheet" href="/sign.css">
+</head>
+<body>
+    <div class="container">
+        <div class="signup-box">
+            <h2>Login</h2>
+            <form id="loginForm" action="/login" method="POST">
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+
+            <% if (message) { %>
+                <p id="message"><%= message %></p>
+            <% } %>
+        </div>
+    </div>
+    <!-- <script src="/public/script.js"></script> -->
+    <script>
+        fetch("/check-auth")
+            .then(res => res.json())
+            .then(data => {
+                if (data.authenticated) {
+                    window.location.href = "/home"; // Prevents accessing login page if already logged in
+                }
+            });
+    </script>
+    
+    
+</body>
+</html>

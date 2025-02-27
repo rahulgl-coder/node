@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users' Blogs</title>
+    <link rel="stylesheet" href="/home.css">
+</head>
+<body>
+ 
+    <%- include('partial/adminHeader', { user: user }) %>
+
+    <main>
+        <section class="blog-posts">
+            <h2><%= posts
+                .title %></h2>
+            <% if (posts && posts.length > 0) { %>
+                <ul>
+                    <% posts.forEach(post => { %>
+                        <li>
+                            <% if (post.image) { %>
+                                <img src="/uploads/<%= post.image %>" alt="Post Image" width="200">
+                            <% } %>
+                            <h3><%= post.title %></h3>
+                            <p><%= post.content %></p>
+                            <p>Posted on: <%= new Date(post.createdAt).toLocaleString() %></p>
+                           <a href="/editadmin/<%= post._id%>">Edit</a>
+                           <% if(post.status === "true"){ %>
+                            <a style="color: orange;" href="/deleteadmin/<%= post._id %>" onclick="return confirm('Are you sure?')">Block post</a>
+                        <% } else if(post.status === "false"){ %>
+                            <a style="color: green;" href="/deleteadmin/<%= post._id %>" onclick="return confirm('Are you sure?')">Show public</a>
+                        <% } %>
+                        
+                            <a href="/viewadmin/<%= post._id %>">View</a>
+                     
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+           
+             
+                    <p>No posts available.</p>
+ 
+            <% } %>
+        </section>
+    </main>
+
+    <!-- Include footer -->
+    <%- include('partial/footer') %>
+</body>
+</html>

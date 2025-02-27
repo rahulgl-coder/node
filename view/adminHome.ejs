@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/adminHome.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <!-- <%- include('partial/adminHeader', { user: user }) %> -->
+    <%- include('partial/adminHeader', { user: user }) %>
+    
+    <div class="container">
+        <h1>Welcome,<%= admin.userName %></h1>
+        <h2>User Management</h2>
+        <table>
+            <thead>
+                <tr>
+                
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(function(user) { %>
+                    <tr>
+                      
+                        <td><%= user.userName %></td>
+                        <td><%= user.email %></td>
+                        <td><%= user.role %></td>
+                        <td>
+                            <% if(user.status === "true") { %>
+                                <a href="/viewblogs/<%= user._id %>">View post</a> 
+                                <a style="color: orange;" href="/blockuser/<%= user._id %>" onclick="return confirm('Are you sure?')">Block</a>
+                            <% } else { %>
+                                <a style="color: green;" href="/blockuser/<%= user._id %>" onclick="return confirm('Are you sure?')">UnBlock</a>
+                            <% } %>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <%- include('partial/footer') %>
+
+
+       
+    <script>
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
+    </script>
+</body>
+</html>
